@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Shop - UMKM Fest Mockup</title>
+    <style>
+        :root {
+            --primary: #FE2C55;
+            --dark: #121212;
+            --gray: #E5E5E5;
+            --text: #333;
+            --bg: #F8F8F8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Simulasi Layar HP 9:16 */
+        .mobile-screen {
+            width: 375px;
+            height: 812px;
+            background-color: var(--bg);
+            position: relative;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-bar {
+            flex: 1;
+            background: #f1f1f1;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 14px;
+            color: #888;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab-btn {
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #666;
+            padding-bottom: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: #000;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge-pill {
+            font-size: 10px;
+            background: #FFF0F3;
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: normal;
+        }
+
+        /* Product Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 140px;
+            background-color: #ddd;
+            position: relative;
+        }
+        
+        /* Placeholder Colors for demo */
+        .card-img.c1 { background: #a8d8ea; }
+        .card-img.c2 { background: #aa96da; }
+        .card-img.c3 { background: #fcbad3; }
+        .card-img.c4 { background: #ffffd2; }
+
+        .verified-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.7);
+            color: #FFD700;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-body {
+            padding: 8px;
+        }
+
+        .product-name {
+            font-size: 12px;
+            color: #333;
+            margin: 0 0 4px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.3;
+        }
+
+        .price {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .meta {
+            font-size: 10px;
+            color: #888;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .location-tag {
+            font-size: 10px;
+            color: #555;
+            background: #eee;
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            background: #fff;
+            border-top: 1px solid #eee;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            font-size: 10px;
+            color: #888;
+        }
+        
+        .nav-item { text-align: center; }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+        .nav-item.active { color: #000; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <div class="mobile-screen">
+        <!-- Header -->
+        <div class="header">
+            <div style="font-weight:bold; font-size:18px; margin-right:10px;">Shop</div>
+            <div class="search-bar">🔍 Cari di Toko...</div>
+            <div style="margin-left:10px;">🛒</div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn" id="tab-foryou" onclick="switchTab('foryou')">For You</button>
+            <button class="tab-btn active" id="tab-umkm" onclick="switchTab('umkm')">UMKM Fest 🌟</button>
+        </div>
+
+        <!-- Content Container -->
+        <div class="content" id="main-content">
+            <!-- Konten akan di-render oleh JS -->
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="bottom-nav">
+            <div class="nav-item"><span class="nav-icon">🏠</span>Home</div>
+            <div class="nav-item active"><span class="nav-icon">🛍️</span>Shop</div>
+            <div class="nav-item"><span class="nav-icon">➕</span>Create</div>
+            <div class="nav-item"><span class="nav-icon"></span>Inbox</div>
+            <div class="nav-item"><span class="nav-icon">👤</span>Profile</div>
+        </div>
+    </div>
+
+    <script>
+        // Data Dummy
+        const topPerformers = [
+            { name: "Kopi Gayo Asli Aceh (250gr)", price: "Rp 45.000", sold: "1.2rb", rating: "4.9", color: "c1" },
+            { name: "Tas Anyaman Rotan Handmade", price: "Rp 89.900", sold: "850", rating: "4.8", color: "c2" },
+            { name: "Keripik Pisang Khas Lampung", price: "Rp 15.000", sold: "3.4rb", rating: "4.7", color: "c3" },
+            { name: "Batik Tulis Solo Premium", price: "Rp 150.000", sold: "400", rating: "5.0", color: "c4" }
+        ];
+
+        const localProducts = [
+            { name: "Sambal Matah Khas Bali", price: "Rp 22.000", loc: "Bali", color: "c3" },
+            { name: "Gudeg Kaleng Yogya", price: "Rp 35.000", loc: "Yogya", color: "c1" },
+            { name: "Kain Tenun NTT", price: "Rp 120.000", loc: "NTT", color: "c2" },
+            { name: "Dodol Garut Asli", price: "Rp 12.000", loc: "Bandung", color: "c4" },
+            { name: "Rendang Kering Padang", price: "Rp 85.000", loc: "Padang", color: "c1" },
+            { name: "Bolu Kukus Mekar Wangi", price: "Rp 18.000", loc: "Malang", color: "c3" }
+        ];
+
+        function renderContent() {
+            const container = document.getElementById('main-content');
+            let html = `
+                <!-- Section: Top Performers -->
+                <div class="section-title">
+                    <span>🔥 Top 4 UMKM Bulan Ini</span>
+                    <span class="badge-pill">Lihat Semua</span>
+                </div>
+                <div class="grid">
+                    ${topPerformers.map(item => `
+                        <div class="card">
+                            <div class="card-img ${item.color}">
+                                <div class="verified-badge">⭐ Verified</div>
+                            </div>
+                            <div class="card-body">
+                                <p class="product-name">${item.name}</p>
+                                <div class="price">${item.price}</div>
+                                <div class="meta">⭐ ${item.rating} | ${item.sold} terjual</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- Section: Local Discovery -->
+                <div class="section-title">
+                    <span>📍 Produk UMKM Terdekat Kamu</span>
+                    <span class="badge-pill">Sesuaikan</span>
+                </div>
+                <div class="grid">
+                    ${localProducts.map(item => `
+                        <div class="card">
+                            <div class="card-img ${item.color}">
+                                <div class="verified-badge">🌟 UMKM Lokal</div>
+                            </div>
+                            <div class="card-body">
+                                <p class="product-name">${item.name}</p>
+                                <div class="price">${item.price}</div>
+                                <div class="meta">
+                                    <span class="location-tag"> ${item.loc}</span>
+                                    <span>Gratis Ongkir</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function switchTab(tabName) {
+            const btnForyou = document.getElementById('tab-foryou');
+            const btnUmkm = document.getElementById('tab-umkm');
+            const container = document.getElementById('main-content');
+
+            if (tabName === 'umkm') {
+                btnUmkm.classList.add('active');
+                btnForyou.classList.remove('active');
+                renderContent(); // Render mockup UMKM
+            } else {
+                btnForyou.classList.add('active');
+                btnUmkm.classList.remove('active');
+                // Simulasi For You (Kosong/Placeholder)
+                container.innerHTML = `
+                    <div style="padding:20px; text-align:center; color:#888; margin-top:50px;">
+                        <div style="font-size:40px;"></div>
+                        <p>For You Page (Algoritma Utama)</p>
+                        <p style="font-size:12px;">Menampilkan Brand Besar & Konten Viral</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Init
+        renderContent();
+
+    </script>
+</body>
+</html>
